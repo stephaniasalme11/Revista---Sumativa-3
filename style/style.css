@@ -1,0 +1,190 @@
+* { /*establecemos un reseto de los estilos,e liminando margenes y rellenos predeterminados*/
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /*Aseguramos que el ancho y el alto d elos elementos incluyan el padding y el borde*/
+}
+
+body { /*Utilizamos el Flexbox para centrar su contenido tanto vertical como horizontalmente*/
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*Establecemos una fuente y un color de fondo*/
+    font-family: sans-serif;
+    background-color: #E6E6FA;
+}
+/*la clase book represneta al contenedor d ela revista, este tiene dimensiones y trancisones específicas para efectos de transformación. como abrir o cerrar la revista*/
+.book {
+    position: relative;
+    width: 350px;
+    height: 500px;
+    transition: transform 0.5s;
+}
+/*Paper represneta cada página de la revista, ocupando todo el contenedor de la misma. Perspective se utiliza para crear un efecto tridimensional al grirar las páginas*/
+.paper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    perspective: 1500px;
+
+}
+/*Creamos una imagen de fondo, bordes redondeados y un padding interno para la revista. La propiedad transform-origin establece en "izquierda para que la rotación ocurra desde ese punto"*/
+.front,
+.back {
+    background-image: url('/img/fondo.jpg');
+    position: absolute;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform-origin: left;
+    transition: transform 0.5s;
+}
+/*En el front tenemos el mayor z-index, esto quiere decir que se mostrará por encima de la parte posterior*/
+.front {
+    z-index: 1;
+    backface-visibility: hidden;/*Esta propiedad oculya la parte trasera cuando se gira el frontal*/
+    border-left: 3px solid #4B0082;
+}
+
+.back {
+    z-index: 0;
+}
+/*Ambos contenedorese están centradps dentro de sus respectivas hojas, la parte posterior se rota en el eje Y para que quede oculta y no esté visible*/
+.front-content,
+.back-content {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-content {
+    transform: rotateY(180deg)
+}
+
+/*Efecto de Volteo. Este afecto aplica una rotación a amabas caras cuando la clase 'flipped' se añade al elemento, creando así ele efecto visual de pasar la página*/
+.flipped .front,
+.flipped .back {
+    transform: rotateY(-180deg);
+}
+
+/* Control de los botones. Los botones son estilizados sin bordes nni fondo, con un cursor pointer que indica la interactividad,lo iconos dentro d elos botones tienen un tamaño y color en específico  Se eliminan los contronos y s ecambia el color del icono al pasar el cursor sobre él.*/
+button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin: 10px;
+    transition: transform 0.5s;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:hover i {
+    color: #EE82EE;
+}
+
+i {
+    font-size: 50px;
+    color: #4B0082;
+}
+
+/* Orden de cada hoja. Se asignan valores específicos a z-index para controlar el orden en que se apilan las páginas, asegurando que siempre se muestre la página correcta en la parte superior.*/
+#p1 {
+    z-index: 5;
+}
+
+#p2 {
+    z-index: 4;
+}
+
+#p3 {
+    z-index: 3;
+}
+#p4{
+    z-index: 2;
+}
+#p5{
+    z-index: 1;
+}
+/*Titulos y más*/
+.logo{ /*Posicionamos el logo de manera absoluta respecto al contenedor más cercano que tenga. Se etsablece un ancho y un top*/
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 100px;
+    height: auto ;
+}
+h1{ /*Centramos los titulos y definimos una fuente a los títulos*/
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+/*Le damos a las imágenes un ancho y alto*/
+img{
+    height: 100%;
+    width: 100%;
+}
+/*Esto crea una sombra alredeor de la imagen de la portada*/
+.prin{
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+
+}
+/*Colocamos el nombre del autor en la esquina inferior derecha de la portada. Definimos fuente y tamaño*/
+.autor{
+    position: absolute;
+    bottom: 20px; 
+    right: 20px; 
+    font-size: 16px; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+.title h1, h2{
+   margin-bottom: 5px;
+   text-align: center;
+}
+.title p{
+    padding: 1.5px;
+    text-align: center;
+}
+h2{
+    font-size: medium;
+    text-align: justify;
+    
+}
+/*APlicamos esquinas redondeadas a las imágenes, ajustamos ancho y alto de cada una de las imágenes. Display:block establece que la imagen se comporte como unbloque y se centre horzontalmente con mágenes automáticos*/
+.title img{
+    border-radius: 5px;
+    width: 50%; 
+    max-width: 300px; 
+    height: auto; 
+    display: block; 
+    margin: 10px auto 10px; 
+}
+/*La calse poema genera un fondo que hace cintraste con el texto, con espacios y margenes establecidos*/
+.poem {
+    padding: 20px; 
+    background-color: #f0f8ff; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; 
+}
+
+.poem h2 {
+    text-align: center; 
+}
+
+.poem p {
+    margin-bottom: 10px; 
+}
+li{
+    list-style: none;
+}
